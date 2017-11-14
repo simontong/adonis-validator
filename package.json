@@ -1,0 +1,30 @@
+{
+  "name": "adonis-validator",
+  "version": "1.0.0",
+  "description": "Validator for AdonisJS",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simontong/adonis-validator.git"
+  },
+  "keywords": [
+    "adonis",
+    "validator",
+    "validatorjs",
+    "validation",
+    "adonis-validator"
+  ],
+  "author": "Simon Tong <simon@projectplanet.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simontong/adonis-validator/issues"
+  },
+  "homepage": "https://github.com/simontong/adonis-validator#readme",
+  "dependencies": {
+    "@adonisjs/generic-exceptions": "^1.0.0",
+    "validatorjs": "^3.13.5"
+  }
+}
