@@ -61,6 +61,11 @@ class ValidatorMiddleware {
       validator.messages
     )
 
+    // add custom attributes
+    if (validator.attributes) {
+      validation.setAttributenNames(validator.attributes)
+    }
+
     // wrap promise around validatorjs (doesn't support async/await currently)
     const passes = await new Promise(resolve => {
       validation.passes(() => resolve(true))

@@ -23,6 +23,13 @@ const providers = [
 
 ## Using the module:
 
+Create a validator object (saves to `app/Validators`) by executing: 
+```bash
+# change 'UserSave' to the name you wish to use
+$ adonis make:validator UserSave
+```
+You can now add rules to the `app/Validators/UserSave` class.
+
 ```js
 // on a single route
 Route.post('/user', 'UserController.store').validator('UserSave')
