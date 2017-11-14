@@ -63,7 +63,7 @@ class ValidatorMiddleware {
 
     // add custom attributes
     if (validator.attributes) {
-      validation.setAttributenNames(validator.attributes)
+      validation.setAttributeNames(validator.attributes)
     }
 
     // wrap promise around validatorjs (doesn't support async/await currently)
