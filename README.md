@@ -44,7 +44,7 @@ Route.post('/user', ({request, response}) => {
 })
 ```
 
-# Custom validation rules
+## Custom validation rules
 
 Custom rule without asynchronicity:
 ```js
