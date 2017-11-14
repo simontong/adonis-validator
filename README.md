@@ -49,7 +49,7 @@ Route.post('/user', ({request, response}) => {
 Custom rule without asynchronicity:
 ```js
 const Validator = use('Validator')
-Validator.registerAsync('equalsFooBar', function (value, req, attribute) {
+Validator.registerAsync('equalsFooBar', function (value, args, attribute) {
   return value === 'FooBar'
 }, ':attribute does not equal FooBar')
 ```
@@ -57,15 +57,11 @@ Validator.registerAsync('equalsFooBar', function (value, req, attribute) {
 Asynchronous rules:
 ```js
 const Validator = use('Validator')
-Validator.registerAsync('exists', function (value, attribute, req, passes) {
-    if (!value && !req) {
-      return passes()
-    }
-  
+Validator.registerAsync('exists', function (value, attribute, args, passes) {
     // get arguments
-    const args = this.getParameters()
-    const dbTable = args[0]
-    const dbField = args[1] || 'id'
+    const params = this.getParameters() // or args.split(',')
+    const dbTable = params[0]
+    const dbField = params[1] || 'id'
   
     // query function
     const fn = value instanceof Array ? 'whereIn' : 'where'
