@@ -28,10 +28,15 @@ class ValidatorMiddleware {
     const validatorInstance = resolver.forDir('validators').resolve(validator)
     validatorInstance.ctx = ctx
 
-    // run validation
-    const validate = await this._runValidations(ctx.request, validatorInstance)
+    // check for unauthorized request
+    const authorized = await this._authorize(validatorInstance)
+    if (!authorized) {
+      this._endResponseIfCan(ctx.response, 'Unauthorized request', 401)
+      return
+    }
 
     // if validation failed then send response
+    const validate = await this._runValidations(ctx.request, validatorInstance)
     if (!validate) {
       this._endResponseIfCan(ctx.response, 'Validation failed', 400)
       return
@@ -85,6 +90,19 @@ class ValidatorMiddleware {
 
     // throw exception and pass back validation errors
     throw CE.ValidationException.validationFailed(validation.errors)
+  }
+
+  /**
+   * Authorization on validator endpoint
+   * @param validator
+   * @returns {*}
+   * @private
+   */
+  _authorize (validator) {
+    if (typeof validator.authorize !== 'function') {
+      return true
+    }
+    return validator.authorize()
   }
 
   /**
