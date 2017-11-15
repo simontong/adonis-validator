@@ -51,6 +51,18 @@ Route.post('/user', ({request, response}) => {
 })
 ```
 
+# Authorize requests
+By adding a `authorize()` method to your validator you can control access on an endpoint:
+```js
+class UserSave {
+  // ..validation rules
+  
+  authorize () {
+    return thix.ctx.user.admin ? true : false
+  }
+}
+```
+
 ## Custom validation rules
 
 Custom rule without asynchronicity:
